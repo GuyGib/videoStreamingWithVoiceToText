@@ -17,7 +17,7 @@ class Thread_A(threading.Thread):
 
     def run(self):
         exitFlag=0
-        global safeWord
+        global wake_up_word
         global SendText
         global helpLines
         while not exitFlag:
@@ -26,7 +26,7 @@ class Thread_A(threading.Thread):
                 audioText = self.r.listen(source, phrase_time_limit=1)
                 try:
                     textOfClient = self.r.recognize_google(audioText)
-                    if safeWord in textOfClient:
+                    if wake_up_word in textOfClient:
                         audioText = self.r.listen(source, phrase_time_limit=3)
                         try:
                             SendText = self.r.recognize_google(audioText)
@@ -44,19 +44,19 @@ def index():
     return render_template('index.html', myfunction=saveWord)
 
 
-@app.route('/safeWord')
+@app.route('/wake_up_word')
 def saveWord():
-    global safeWord
+    global wake_up_word
     r = sr.Recognizer()
     with sr.Microphone() as source:
         r.adjust_for_ambient_noise(source)
         audioText = r.listen(source, phrase_time_limit=1)
         try:
-            safeWord = r.recognize_google(audioText)
+            wake_up_word = r.recognize_google(audioText)
         except  Exception as e:
-            safeWord = None
-    if safeWord != None:
-        return render_template('index.html', safe='Is your word is ' + safeWord, myfunction=saveWord, GoIn=True)
+            wake_up_word = None
+    if wake_up_word != None:
+        return render_template('index.html', safe='Is your word is ' + wake_up_word, myfunction=saveWord, GoIn=True)
     else:
         return render_template('index.html', safe=None, myfunction=saveWord)
 
