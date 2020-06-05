@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>MyCoach</title>
+  </head>
+  <body style="background-color: #2BBBAD!important">
+  <div class="absolute" align="center">
+    <img src="{{url_for('static', filename='logo.png')}}" height="200" align="center">
+    </div>
+  <div align="center">
+    <iframe src="{{ url_for('text') }}" style="border:none" scrolling="no" width="500px"></iframe>
+    <img id="bg" src="{{ url_for('video_feed') }}" height="500px"  >
+  </div>
+  </body>
+</html>
